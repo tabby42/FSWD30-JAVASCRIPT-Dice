@@ -1,0 +1,38 @@
+/*Fonts*/
+$font-fam: 'Fira Sans', sans-serif;
+$heavy: 900;
+$bold: 700;
+$regular: 400;
+
+.flex-row {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+}
+
+.flex-1 {
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+}
+
+body {
+	font-family: $font-fam;
+}
+
+header {
+	h1, span {
+		text-align: center;
+		font-weight: $heavy;
+	}
+	span {
+	    margin: 0.67em 0;
+    	font-size: 2em;
+	}
+
+}
+
