@@ -3,6 +3,9 @@ $font-fam: 'Fira Sans', sans-serif;
 $heavy: 900;
 $bold: 700;
 $regular: 400;
+/*Colors*/
+$main-color: #000;
+$white: #fff;
 
 .flex-row {
 	display: -webkit-box;
@@ -20,6 +23,12 @@ $regular: 400;
 	        flex: 1;
 }
 
+/* .j-center {*/
+/* 	-webkit-box-pack: center;*/
+/* 	    -ms-flex-pack: center;*/
+/* 	        justify-content: center;*/
+/* }*/
+
 body {
 	font-family: $font-fam;
 }
@@ -34,4 +43,32 @@ header {
     	font-size: 2em;
 	}
 }
+
+main {
+	> div {
+		text-align: center;
+	}
+}
+
+.btn-big {
+	font-family: $font-fam;
+	font-weight: $heavy;
+    font-size: 1.4em;
+    padding: 10px 30px;
+    background: $main-color;
+    color: $white;
+    border: 2px solid $main-color;
+    outline: 0;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    &:hover, &:focus {
+		background-color: $white;
+		color: $main-color;
+    }
+}
+
+
+
+
 
