@@ -1,4 +1,5 @@
 /*Fonts*/
+/*Colors*/
 .flex-row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13,6 +14,11 @@
   -ms-flex: 1;
   flex: 1; }
 
+/* .j-center {*/
+/* 	-webkit-box-pack: center;*/
+/* 	    -ms-flex-pack: center;*/
+/* 	        justify-content: center;*/
+/* }*/
 body {
   font-family: "Fira Sans", sans-serif; }
 
@@ -22,5 +28,24 @@ header h1, header span {
 header span {
   margin: 0.67em 0;
   font-size: 2em; }
+
+main > div {
+  text-align: center; }
+
+.btn-big {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 900;
+  font-size: 1.4em;
+  padding: 10px 30px;
+  background: #000;
+  color: #fff;
+  border: 2px solid #000;
+  outline: 0;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+  .btn-big:hover, .btn-big:focus {
+    background-color: #fff;
+    color: #000; }
 
 /*# sourceMappingURL=style.css.map */
