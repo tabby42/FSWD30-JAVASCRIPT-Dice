@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+</head>
+
+<body>
+<h1>object try </h1>
+    <script type="text/javascript">
+
+        // new ECMA6 type of doing objects is a bit more intuitive: 
+        // see some more here http://es6-features.org
+
+        class ModernPerson { 
+
+            constructor (first, last) { 
+                this.firstName = first; 
+                this.lastName  = last; 
+                this.skills    = [];
+            } 
+
+            setLastName(newLast) { 
+
+                this.lastName = newLast;
+            } 
+
+            addSkill(skillName) {
+                this.skills.push(skillName);
+            }
+
+        }
+
+
+
+        var modernJohny = new ModernPerson('Johny', 'Futuro');
+        alert(modernJohny.lastName);
+        // doing class var value change in object style
+        modernJohny.setLastName('THX 1138');
+        alert(modernJohny.lastName);
+        // this will work, but is not considered "good" practice
+        modernJohny.lastName = 'Doe';
+        alert(modernJohny.lastName);
+
+        var newGirl = new ModernPerson('Jane','Doe');
+        newGirl.addSkill('JavaScript');
+        newGirl.addSkill('HTML');
+        alert(newGirl.skills);        
+
+        modernJohny.addSkill('HTML');
+        modernJohny.addSkill('PHP');
+        alert(modernJohny.skills);
+
+
+
+
+    </script>
+
+</body>
+</html>

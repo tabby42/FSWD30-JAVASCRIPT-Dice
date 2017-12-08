@@ -18,9 +18,14 @@ $white: #fff;
 }
 
 .flex-1 {
-	-webkit-box-flex: 1;
-	    -ms-flex: 1;
-	        flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 50%;
+            flex: 1 0 50%;
+}
+
+.flex-wrap {
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
 }
 
 /* .j-center {*/
@@ -41,6 +46,9 @@ header {
 	span {
 	    margin: 0.67em 0;
     	font-size: 2em;
+	    position: absolute;
+    	-webkit-transform: translateX(-50%);
+    	        transform: translateX(-50%);
 	}
 }
 
@@ -65,6 +73,9 @@ main {
     &:hover, &:focus {
 		background-color: $white;
 		color: $main-color;
+    }
+    &[disabled] {
+    	cursor: not-allowed;
     }
 }
 
