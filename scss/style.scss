@@ -109,7 +109,87 @@ main {
 /* 	padding-right: 20px;*/
 /* }*/
 
+/*Dice*/
+.dice-container {
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+  	position: relative;
+  	-webkit-perspective: 1000px;
+  	        perspective: 1000px;
+	/* cursor: -webkit-grab;*/
+	/* cursor: grab;*/
+	z-index: 999;
+	-webkit-transition: -webkit-transform 0.2s ease 0;
+	transition: -webkit-transform 0.2s ease 0;
+	transition: transform 0.2s ease 0;
+	transition: transform 0.2s ease 0, -webkit-transform 0.2s ease 0;
+	&:hover {
+		-webkit-transform: scale(0.98);
+		        transform: scale(0.98);
+	}
+}
 
+#dice {
+  	width: 100%;
+  	height: 100%;
+  	position: absolute;
+  	-webkit-transform-style: preserve-3d;
+  	        transform-style: preserve-3d;
+	-webkit-transition: -webkit-transform 1s;
+	transition: -webkit-transform 1s;
+	transition: transform 1s;
+	transition: transform 1s, -webkit-transform 1s;
+	figure {
+		width: 100px;
+		height: 100px;
+		display: block;
+		position: absolute;
+		/* border: 1px solid #000;*/
+		/* box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);*/
+		text-align: center;
+		line-height: 200px;
+		font-size: 60px;
+		/* background-color: #FFF;*/
+	}
+}
+
+#dice figure {
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 100px 100px;
+}
+
+#dice .front  { 
+	-webkit-transform: rotateY(   0deg ) translateZ( 50px ); 
+	        transform: rotateY(   0deg ) translateZ( 50px );
+	background-image: url('../images/dice-1.png');
+}
+#dice .back   { 
+	-webkit-transform: rotateX( 180deg ) translateZ( 50px ); 
+	        transform: rotateX( 180deg ) translateZ( 50px );
+	background-image: url('../images/dice-6.png');
+}
+#dice .right  { 
+	-webkit-transform: rotateY(  90deg ) translateZ( 50px ); 
+	        transform: rotateY(  90deg ) translateZ( 50px );
+	background-image: url('../images/dice-4.png');
+}
+#dice .left   { 
+	-webkit-transform: rotateY( -90deg ) translateZ( 50px ); 
+	        transform: rotateY( -90deg ) translateZ( 50px );
+	background-image: url('../images/dice-3.png');
+}
+#dice .top    { 
+	-webkit-transform: rotateX(  90deg ) translateZ( 50px ); 
+	        transform: rotateX(  90deg ) translateZ( 50px );
+	background-image: url('../images/dice-2.png');
+}
+#dice .bottom { 
+	-webkit-transform: rotateX( -90deg ) translateZ( 50px ); 
+	        transform: rotateX( -90deg ) translateZ( 50px );
+	background-image: url('../images/dice-5.png');
+}
 
 
 
