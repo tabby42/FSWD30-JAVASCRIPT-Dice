@@ -17,10 +17,9 @@ class Player {
 		var thirdRoll = createRand();
 		this.rolls = [firstRoll, secondRoll, thirdRoll];
 		console.log(this.rolls );
-		//roll visible dice
+		//roll visible dice and show rolled numbers
 		this.rollUIDice(this);
-        //setTimeout(this.displayRolls(this.dice), 4000);
-		//calculate how far teh snail can move based on the numbers rolled
+		//calculate how far he snail can move based on the numbers rolled
 		var dist = this.calcSteps();
 		//move snail
 		this.moveEl(snail, dist, side);

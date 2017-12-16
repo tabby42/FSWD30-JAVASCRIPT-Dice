@@ -1,5 +1,6 @@
 /*Fonts*/
 /*Colors*/
+/*flexbox rules*/
 .flex-row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -101,7 +102,7 @@ main > div:not(.anim) {
     -webkit-transform: scale(0.98);
     transform: scale(0.98); }
 
-#dice {
+.dice-container > div {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -111,7 +112,7 @@ main > div:not(.anim) {
   transition: -webkit-transform 1s;
   transition: transform 1s;
   transition: transform 1s, -webkit-transform 1s; }
-  #dice figure {
+  .dice-container > div figure {
     width: 100px;
     height: 100px;
     display: block;
@@ -123,39 +124,63 @@ main > div:not(.anim) {
     font-size: 60px;
     /* background-color: #FFF;*/ }
 
-#dice figure {
+.dice-container > div figure {
   background-repeat: no-repeat;
   background-position: top left;
   background-size: 100px 100px; }
 
-#dice .front {
+.dice-container > div .front {
   -webkit-transform: rotateY(0deg) translateZ(50px);
   transform: rotateY(0deg) translateZ(50px);
   background-image: url("../images/dice-1.png"); }
 
-#dice .back {
+.dice-container > div .back {
   -webkit-transform: rotateX(180deg) translateZ(50px);
   transform: rotateX(180deg) translateZ(50px);
   background-image: url("../images/dice-6.png"); }
 
-#dice .right {
+.dice-container > div .right {
   -webkit-transform: rotateY(90deg) translateZ(50px);
   transform: rotateY(90deg) translateZ(50px);
   background-image: url("../images/dice-4.png"); }
 
-#dice .left {
+.dice-container > div .left {
   -webkit-transform: rotateY(-90deg) translateZ(50px);
   transform: rotateY(-90deg) translateZ(50px);
   background-image: url("../images/dice-3.png"); }
 
-#dice .top {
+.dice-container > div .top {
   -webkit-transform: rotateX(90deg) translateZ(50px);
   transform: rotateX(90deg) translateZ(50px);
   background-image: url("../images/dice-2.png"); }
 
-#dice .bottom {
+.dice-container > div .bottom {
   -webkit-transform: rotateX(-90deg) translateZ(50px);
   transform: rotateX(-90deg) translateZ(50px);
   background-image: url("../images/dice-5.png"); }
+
+.dice-container > div.show1 {
+  -webkit-transform: translateZ(-100px) rotateY(0deg);
+  transform: translateZ(-100px) rotateY(0deg); }
+
+.dice-container > div.show6 {
+  -webkit-transform: translateZ(-100px) rotateX(-180deg);
+  transform: translateZ(-100px) rotateX(-180deg); }
+
+.dice-container > div.show4 {
+  -webkit-transform: translateZ(-100px) rotateY(-90deg);
+  transform: translateZ(-100px) rotateY(-90deg); }
+
+.dice-container > div.show3 {
+  -webkit-transform: translateZ(-100px) rotateY(90deg);
+  transform: translateZ(-100px) rotateY(90deg); }
+
+.dice-container > div.show2 {
+  -webkit-transform: translateZ(-100px) rotateX(-90deg);
+  transform: translateZ(-100px) rotateX(-90deg); }
+
+.dice-container > div.show5 {
+  -webkit-transform: translateZ(-100px) rotateX(90deg);
+  transform: translateZ(-100px) rotateX(90deg); }
 
 /*# sourceMappingURL=style.css.map */
