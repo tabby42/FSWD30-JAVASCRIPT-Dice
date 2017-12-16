@@ -1,7 +1,8 @@
 class Player { 
-	constructor (name) { 
+	constructor (name, dice) { 
 		this.name = name;
 		//this.rollCount = 0;
+		this.dice = dice;
 		this.rolls = [];
 		this.score = 0;
 		this.max = 500;
@@ -9,21 +10,28 @@ class Player {
 		this.snailPosition = 20;
 	} 
 
-	rollDice (player, selector, snail, side) { 
+	rollDice (player, snail, side) { 
+		//save rolled numbers
 		var firstRoll = createRand();
 		var secondRoll = createRand();
 		var thirdRoll = createRand();
 		this.rolls = [firstRoll, secondRoll, thirdRoll];
 		console.log(this.rolls );
-		this.displayRolls (selector);
+		//roll visible dice
+		this.rollUIDice(this);
+        //setTimeout(this.displayRolls(this.dice), 4000);
+		//calculate how far teh snail can move based on the numbers rolled
 		var dist = this.calcSteps();
+		//move snail
 		this.moveEl(snail, dist, side);
 	} 
 
 	displayRolls (selector) {
-		console.log("player rolls:" + this.name);
 		for (var i = 0; i < selector.length; i++) {
-			selector[i].innerHTML = this.rolls[i];
+			//console.log("selbefore" + selector[i].className);
+			//console.log("should turn to " + this.rolls[i] );
+			selector[i].className = 'show' + this.rolls[i];
+			//console.log("selafter" + selector[i].className);
 		}
 	}
 
@@ -35,30 +43,75 @@ class Player {
 				this.steps += 5;
 			}
 		}
-		console.log(this.steps);
+		//console.log(this.steps);
 		return this.steps;
 	}
 
 	moveEl(el, distance, side) {
 	    var style = el.style;
-		console.log(style);
+		//console.log(style);
 	    if (side === "left") {
 	    	style.marginLeft = Number(this.snailPosition + distance) + "px";
 	    } else {
 	    	style.marginRight = Number(this.snailPosition + distance) + "px";
 	    }
 	}
+
+	show() {
+		for (var i = 0; i < this.dice.length; i++) {
+			this.dice[i].setAttribute('class', 'show'+face);
+			 if(face == 6) {
+			    face = 1;
+			  } else {
+			    face++; 
+			  }
+		}
+		if(face == 6) {
+	    	face = 1;
+	  	} else {
+	    	face++; 
+	  	}
+	}
+
+	rollUIDice(playerobj) {
+    	var counter = 1;
+    	var end = createRandTwo();
+    	(function repeat() {
+	        console.log('Run No. ' + counter);
+	        if (counter < end) {
+	            counter++;
+	            setTimeout(repeat, 200);
+				setTimeout(playerobj.show(), 200);
+				//on the last run, stop at rolled number
+				if (counter === end) {
+        			setTimeout(playerobj.displayRolls(playerobj.dice), 1200);
+				}
+	        }
+    	})();
+	}
 }
 
-var playerOne = new Player("One");
+//variables for dice
+var face = 1,
+	dice1 = document.getElementById("dice-1"),
+	dice2 = document.getElementById("dice-2"),
+	dice3 = document.getElementById("dice-3"),
+	dice4 = document.getElementById("dice-4"),
+	dice5 = document.getElementById("dice-5"),
+	dice6 = document.getElementById("dice-6"),
+	diceOne = [dice1, dice2, dice3],
+	diceTwo = [dice4, dice5, dice6];
+//variables for player
+var playerOne = new Player("One", diceOne);
 playerOne.hasRolled = false;
-var playerTwo = new Player("Two");
+var playerTwo = new Player("Two", diceTwo);
 
 // var playerOne = prompt("Player 1, please enter your name:");
 // var playerTwo = prompt("Player 2, please enter your name:");
 document.getElementById("player-1").textContent = playerOne.name;
 document.getElementById("player-2").textContent = playerTwo.name;
 
+//variables for UI elements
 var displaysOne = document.getElementsByClassName("display-p1");
 var displaysTwo = document.getElementsByClassName("display-p2");
 
@@ -68,8 +121,9 @@ var btnTwo = document.getElementById("btn-player-2");
 var snailOne = document.getElementById("snail-1");
 var snailTwo = document.getElementById("snail-2");
 
-btnOne.addEventListener("click", () => playerOne.rollDice(playerOne, displaysOne, snailOne, "left"));
-btnTwo.addEventListener("click", () => playerTwo.rollDice(playerTwo, displaysTwo, snailTwo, "right"));
+//Event Listeners
+btnOne.addEventListener("click", () => playerOne.rollDice(playerOne, snailOne, "left"));
+btnTwo.addEventListener("click", () => playerTwo.rollDice(playerTwo, snailTwo, "right"));
 
 //btnTwo.disabled = true; 
 
@@ -77,16 +131,20 @@ function createRand () {
 	return Math.floor((Math.random() * 6) + 1);
 }
 
-//Dynamic Background
+function createRandTwo () {
+	return Math.floor((Math.random() * 5) + 4);
+}
+
 //number.toString(radix) -->
 //Which base to use for representing a numeric value. Must be an integer between 2 and 36
-/**
+/** getRandomInt -->
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution
  */
 // function getRandomInt(min, max) {
 //     return Math.floor(Math.random() * (max - min + 1)) + min;
 // }
+//Dynamic Background
 function randomBackground () {
 	var red = Math.floor(Math.random() * 256);
 	var blue = Math.floor(Math.random() * 256);
@@ -97,6 +155,10 @@ function randomBackground () {
 }
 
 window.addEventListener('load', randomBackground);
+
+
+
+
 
 
 
