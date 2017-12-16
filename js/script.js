@@ -134,6 +134,8 @@ function createRandTwo () {
 	return Math.floor((Math.random() * 5) + 4);
 }
 
+
+
 //number.toString(radix) -->
 //Which base to use for representing a numeric value. Must be an integer between 2 and 36
 /** getRandomInt -->
