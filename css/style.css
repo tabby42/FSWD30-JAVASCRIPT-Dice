@@ -80,6 +80,10 @@ main > div:not(.anim) {
 .msg-box {
   min-height: 90px; }
 
+#turn-msg {
+  min-height: 50px;
+  text-align: center; }
+
 /*Dice*/
 .dice-container {
   display: inline-block;
