@@ -155,6 +155,7 @@ var btnTwo = document.getElementById("btn-player-2");
 var snailOne = document.getElementById("snail-1");
 var snailTwo = document.getElementById("snail-2");
 
+var turnMsg = document.getElementById("turn-msg");
 
 //Event Listeners
 btnOne.addEventListener("click", () => playerOne.rollDice(playerOne, snailOne, "left"));
@@ -171,13 +172,17 @@ function checkTurn() {
 	if (!btnOne.disabled && btnTwo.disabled) {
 		btnTwo.disabled = false;
 		btnOne.disabled = true;
+		setTimeout(function () {
+			turnMsg.innerHTML = "Hey, " + playerTwo.name + "! It's your turn!";
+		}, 3200);
 	} else {
 		btnTwo.disabled = true;
 		btnOne.disabled = false;
+		setTimeout(function () {
+			turnMsg.innerHTML = "Hey, <strong class='color-1'>" + playerOne.name + "!</strong> It's your turn!";
+		}, 3200);
 	}
 }
-
-
 
 /** getRandomInt -->
  * Returns a random integer between min (inclusive) and max (inclusive)
