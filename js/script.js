@@ -2,7 +2,7 @@
 //snail should only move when visible rolling is over --> DONE
 //after each roll --> display message, how far the snail will move --> DONE
 //display score
-//tell, which player's turn it is, enable/disable button respectively
+//tell, which player's turn it is, enable/disable button respectively --> DONE
 //declare winner, when one player's score has reached max
 
 class Player { 
@@ -87,7 +87,6 @@ class Player {
 	}
 
 	insertMsg(message) {
-		//console.log(playerobj.msgBox);
 		this.msgBox.innerHTML = message;
 	}
 
@@ -104,7 +103,7 @@ class Player {
 				if (counter === end) {
         			setTimeout(function () {
         				playerobj.displayRolls(playerobj.dice);
-        			}, 1200);
+        			}, 800);
         			//calculate how far he snail can move based on the numbers rolled
 					var dist = playerobj.calcSteps();
 					//display message
@@ -139,7 +138,6 @@ var msgOne = document.getElementById("msg-1");
 var msgTwo = document.getElementById("msg-2");
 //variables for player
 var playerOne = new Player("One", diceOne, msgOne);
-playerOne.hasRolled = false;
 var playerTwo = new Player("Two", diceTwo, msgTwo);
 
 // var playerOne = prompt("Player 1, please enter your name:");
@@ -162,7 +160,22 @@ var snailTwo = document.getElementById("snail-2");
 btnOne.addEventListener("click", () => playerOne.rollDice(playerOne, snailOne, "left"));
 btnTwo.addEventListener("click", () => playerTwo.rollDice(playerTwo, snailTwo, "right"));
 
-//btnTwo.disabled = true; 
+btnOne.disabled = false;
+btnTwo.disabled = true; 
+
+btnOne.addEventListener("click", checkTurn);
+btnTwo.addEventListener("click", checkTurn);
+
+//enable/disable buttons depending on which player's turn it is
+function checkTurn() {
+	if (!btnOne.disabled && btnTwo.disabled) {
+		btnTwo.disabled = false;
+		btnOne.disabled = true;
+	} else {
+		btnTwo.disabled = true;
+		btnOne.disabled = false;
+	}
+}
 
 
 
