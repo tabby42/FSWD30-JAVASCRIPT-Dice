@@ -3,19 +3,22 @@
 //after each roll --> display message, how far the snail will move --> DONE
 //display score
 //tell, which player's turn it is, enable/disable button respectively --> DONE
-//declare winner, when one player's score has reached max
+//declare winner, when one player's score has reached max --> DONE
+//random color for each player on load
+//identical numbers check not working yet
 
 class Player { 
-	constructor (name, dice, msgBox) { 
+	constructor (name, dice, msgBox, scoreBox) { 
 		this.name = name;
 		this.dice = dice;
 		this.rolls = [];
 		this.msgBox = msgBox;
 		this.msg = "";
 		this.score = 0;
-		this.max = 500;
+		this.scoreBox = scoreBox;
+		this.max = 250;
 		this.steps = 0;
-		this.snailPosition = 20;
+		//this.snailPosition = 20;
 	} 
 
 	rollDice (player, snail, side) { 
@@ -39,16 +42,21 @@ class Player {
 	}
 
 	calcSteps () {
+		//var testarr = [5,5,5];
 		for (var i = 0; i < this.rolls.length; i++) {
 			if (parseInt(this.rolls[i]) === 1) {
-				this.steps += 10;
+				this.steps += 15;
 				this.msg += "You rolled a One!<br>";
 			} else if (parseInt(this.rolls[i]) === 5) {
-				this.steps += 5;
+				this.steps += 10;
 				this.msg += "You rolled a Five!<br>";
 			} 
 		}
-		//console.log(this.steps);
+		if (allIdentical(this.dice)) {
+			this.steps += 50;
+			this.msg += "You rolled three identical numbers!<br>";
+		}
+		console.log(this.dice);
 		if (this.steps > 0) {
 			this.msg += "Your snail can move " + this.steps + " steps!<br>";
 		} else {
@@ -56,7 +64,7 @@ class Player {
 		}
 		//increase score
 		this.score += this.steps;
-		this.snailPosition += this.steps;
+		console.log("Steps: " + this.steps);
 		return this.steps;
 	}
 
@@ -64,9 +72,11 @@ class Player {
 	    var style = el.style;
 		//console.log(style);
 	    if (side === "left") {
-	    	style.marginLeft = Number(this.snailPosition + distance) + "px";
+	    	style.marginLeft = Number(this.score) + "px";
+			console.log("margin: " + style.marginLeft);
 	    } else {
-	    	style.marginRight = Number(this.snailPosition + distance) + "px";
+	    	style.marginRight = Number(this.score) + "px";
+			console.log("margin: " + style.marginRight);
 	    }
 	}
 
@@ -88,6 +98,15 @@ class Player {
 
 	insertMsg(message) {
 		this.msgBox.innerHTML = message;
+	}
+
+	updateScore() {
+		this.scoreBox.innerHTML = this.score;
+		if (this.score >= this.max) {
+			this.msgBox.innerHTML = "You WON!";
+			btnOne.disabled = true;
+			btnTwo.disabled = true;
+		}
 	}
 
 	rollUIDice(playerobj, snail, side) {
@@ -115,6 +134,8 @@ class Player {
 					//move snail
 					setTimeout(function () {
 						playerobj.moveEl(snail, dist, side);
+						//update score display
+						playerobj.updateScore();
 						//reset steps
 						playerobj.steps = 0;
         			}, 3200);
@@ -137,18 +158,16 @@ var face = 1,
 var msgOne = document.getElementById("msg-1");
 var msgTwo = document.getElementById("msg-2");
 //variables for player
-var playerOne = new Player("One", diceOne, msgOne);
-var playerTwo = new Player("Two", diceTwo, msgTwo);
-
+var scoreOne = document.getElementById("score-1");
+var scoreTwo = document.getElementById("score-2");
 // var playerOne = prompt("Player 1, please enter your name:");
 // var playerTwo = prompt("Player 2, please enter your name:");
+var playerOne = new Player("One", diceOne, msgOne, scoreOne);
+var playerTwo = new Player("Two", diceTwo, msgTwo, scoreTwo);
 document.getElementById("player-1").textContent = playerOne.name;
 document.getElementById("player-2").textContent = playerTwo.name;
 
 //variables for UI elements
-// var displaysOne = document.getElementsByClassName("display-p1");
-// var displaysTwo = document.getElementsByClassName("display-p2");
-
 var btnOne = document.getElementById("btn-player-1");
 var btnTwo = document.getElementById("btn-player-2");
 
@@ -173,17 +192,22 @@ function checkTurn() {
 		btnTwo.disabled = false;
 		btnOne.disabled = true;
 		setTimeout(function () {
-			turnMsg.innerHTML = "Hey, " + playerTwo.name + "! It's your turn!";
+			turnMsg.innerHTML = "Hey, <strong class='color-2'>" + playerTwo.name + "!</strong> It's your turn!";
 		}, 3200);
-	} else {
+	} else if (btnOne.disabled && !btnTwo.disabled) {
 		btnTwo.disabled = true;
 		btnOne.disabled = false;
 		setTimeout(function () {
 			turnMsg.innerHTML = "Hey, <strong class='color-1'>" + playerOne.name + "!</strong> It's your turn!";
 		}, 3200);
+	} else {
+		btnTwo.disabled = true;
+		btnOne.disabled = true;
 	}
 }
 
+//helper functions
+ 
 /** getRandomInt -->
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution
@@ -197,6 +221,14 @@ function createRand () {
 
 function createRandTwo () {
 	return Math.floor((Math.random() * 5) + 4);
+}
+
+function allIdentical( arr ) {
+    for(var i = 1; i < arr.length; i++) {
+        if(arr[i] !== arr[0])
+            return false;
+    }
+    return true;
 }
 
 //Dynamic Background
