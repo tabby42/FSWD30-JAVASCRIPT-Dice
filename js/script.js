@@ -1,11 +1,12 @@
 //next -->
 //snail should only move when visible rolling is over --> DONE
 //after each roll --> display message, how far the snail will move --> DONE
-//display score
+//display score --> DONE
 //tell, which player's turn it is, enable/disable button respectively --> DONE
 //declare winner, when one player's score has reached max --> DONE
-//random color for each player on load
-//identical numbers check not working yet
+//random color for each player on load --> DONE
+//help section 
+//identical numbers check not working yet --> DONE
 
 class Player { 
 	constructor (name, dice, msgBox, scoreBox) { 
@@ -18,7 +19,6 @@ class Player {
 		this.scoreBox = scoreBox;
 		this.max = 250;
 		this.steps = 0;
-		//this.snailPosition = 20;
 	} 
 
 	rollDice (player, snail, side) { 
@@ -56,7 +56,6 @@ class Player {
 			this.steps += 50;
 			this.msg += "You rolled three identical numbers!<br>";
 		}
-		console.log(this.dice);
 		if (this.steps > 0) {
 			this.msg += "Your snail can move " + this.steps + " steps!<br>";
 		} else {
@@ -104,6 +103,7 @@ class Player {
 		this.scoreBox.innerHTML = this.score;
 		if (this.score >= this.max) {
 			this.msgBox.innerHTML = "You WON!";
+			turnMsg.innerHTML = "Reload page to start fresh!";
 			btnOne.disabled = true;
 			btnTwo.disabled = true;
 		}
@@ -164,25 +164,35 @@ var scoreTwo = document.getElementById("score-2");
 // var playerTwo = prompt("Player 2, please enter your name:");
 var playerOne = new Player("One", diceOne, msgOne, scoreOne);
 var playerTwo = new Player("Two", diceTwo, msgTwo, scoreTwo);
+var colorOne = randomColor();
+var colorTwo = randomColor();
 document.getElementById("player-1").textContent = playerOne.name;
 document.getElementById("player-2").textContent = playerTwo.name;
+document.getElementById("player-1").style.color = colorOne;
+document.getElementById("player-2").style.color = colorTwo;
 
 //variables for UI elements
 var btnOne = document.getElementById("btn-player-1");
 var btnTwo = document.getElementById("btn-player-2");
+btnOne.disabled = false;
+btnTwo.disabled = true; 
+//style buttons with random color
+btnOne.style.backgroundColor = colorOne;
+btnTwo.style.backgroundColor = colorTwo;
+btnOne.style.borderColor = colorOne;
+btnTwo.style.borderColor = colorTwo;
 
 var snailOne = document.getElementById("snail-1");
 var snailTwo = document.getElementById("snail-2");
+//style snail bg with random color
+snailOne.style.backgroundColor = colorOne;
+snailTwo.style.backgroundColor = colorTwo;
 
 var turnMsg = document.getElementById("turn-msg");
 
 //Event Listeners
 btnOne.addEventListener("click", () => playerOne.rollDice(playerOne, snailOne, "left"));
 btnTwo.addEventListener("click", () => playerTwo.rollDice(playerTwo, snailTwo, "right"));
-
-btnOne.disabled = false;
-btnTwo.disabled = true; 
-
 btnOne.addEventListener("click", checkTurn);
 btnTwo.addEventListener("click", checkTurn);
 
@@ -207,7 +217,7 @@ function checkTurn() {
 }
 
 //helper functions
- 
+
 /** getRandomInt -->
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution
@@ -234,16 +244,17 @@ function allIdentical( arr ) {
 //Dynamic Background
 //number.toString(radix) -->
 //Which base to use for representing a numeric value. Must be an integer between 2 and 36
-function randomBackground () {
+function randomColor () {
 	var red = Math.floor(Math.random() * 256);
 	var blue = Math.floor(Math.random() * 256);
 	var green = Math.floor(Math.random() * 256);
-	document.body.style.backgroundColor = "rgb(" + red + ","  + green + ","  +blue + ")";
+	return "rgb(" + red + ","  + green + ","  +blue + ")";
 	// document.getElementById("color").innerHTML = "rgb(" + red + ","  + green + ","  + blue + ")<br>"
 	// + "HEX: #" + red.toString(16) + green.toString(16) + blue.toString(16);
 }
 
-window.addEventListener('load', randomBackground);
+// var bg = randomColor();
+// document.body.style.backgroundColor = bg;
 
 
 
