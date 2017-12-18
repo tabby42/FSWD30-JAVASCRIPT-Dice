@@ -1,5 +1,9 @@
 /*Fonts*/
 /*Colors*/
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
 /*flexbox rules*/
 .flex-row {
   display: -webkit-box;
@@ -39,16 +43,19 @@ body {
 
 header h1, header span {
   text-align: center;
-  font-weight: 900; }
+  font-weight: 900;
+  margin: 0; }
 header span {
-  margin: 0.67em 0;
+  margin: 0;
   font-size: 2em;
   position: absolute;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%); }
 
-main > div:not(.anim) {
-  text-align: center; }
+main {
+  padding-bottom: 100px; }
+  main > div:not(.anim) {
+    text-align: center; }
 
 .btn-big {
   font-family: "Fira Sans", sans-serif;
@@ -66,7 +73,8 @@ main > div:not(.anim) {
     background-color: #fff;
     color: #000; }
   .btn-big[disabled] {
-    cursor: not-allowed; }
+    cursor: not-allowed;
+    opacity: .5; }
 
 .snail {
   display: inline-block;
@@ -74,21 +82,37 @@ main > div:not(.anim) {
   width: 30px;
   height: 30px;
   background-color: #000;
-  margin-left: 20px;
-  margin-right: 20px; }
+  /* padding-left: 20px;*/
+  /* padding-right: 20px;*/ }
 
 .msg-box {
-  min-height: 90px; }
+  min-height: 75px; }
 
 #turn-msg {
-  min-height: 50px;
+  min-height: 25px;
   text-align: center; }
+
+.anim {
+  padding: 40px 20px; }
+
+.display-p1,
+.display-p2 {
+  display: inline-block; }
+  .display-p1:nth-child(3),
+  .display-p2:nth-child(3) {
+    display: block; }
+
+.score {
+  font-weight: 900; }
+  .score > span {
+    font-weight: 400;
+    font-style: italic; }
 
 /*Dice*/
 .dice-container {
   display: inline-block;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   position: relative;
   -webkit-perspective: 1000px;
   perspective: 1000px;
