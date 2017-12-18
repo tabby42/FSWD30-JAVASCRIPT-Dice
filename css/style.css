@@ -80,8 +80,8 @@ main {
 .snail {
   display: inline-block;
   border-radius: 100%;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-color: #000;
   /* padding-left: 20px;*/
   /* padding-right: 20px;*/ }
@@ -94,17 +94,30 @@ main {
   text-align: center; }
 
 .anim {
-  padding: 40px 20px; }
+  padding: 40px 20px;
+  padding-top: 5px; }
 
 #snail-1 {
   background-image: url("../images/snail-left.png");
   background-position: center;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  background-size: 57%; }
 
 #snail-2 {
   background-image: url("../images/snail-right.png");
   background-position: center;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  background-size: 57%; }
+
+#salad {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background-image: url("../images/leaves.png");
+  background-size: contain; }
 
 .display-p1,
 .display-p2 {
