@@ -39,7 +39,8 @@
 /* 	        justify-content: center;*/
 /* }*/
 body {
-  font-family: "Fira Sans", sans-serif; }
+  font-family: "Fira Sans", sans-serif;
+  background-color: #ddd; }
 
 header h1, header span {
   text-align: center;
@@ -79,8 +80,8 @@ main {
 .snail {
   display: inline-block;
   border-radius: 100%;
-  width: 30px;
-  height: 30px;
+  width: 80px;
+  height: 80px;
   background-color: #000;
   /* padding-left: 20px;*/
   /* padding-right: 20px;*/ }
@@ -94,6 +95,16 @@ main {
 
 .anim {
   padding: 40px 20px; }
+
+#snail-1 {
+  background-image: url("../images/snail-left.png");
+  background-position: center;
+  background-repeat: no-repeat; }
+
+#snail-2 {
+  background-image: url("../images/snail-right.png");
+  background-position: center;
+  background-repeat: no-repeat; }
 
 .display-p1,
 .display-p2 {
@@ -143,7 +154,6 @@ main {
     display: block;
     position: absolute;
     /* border: 1px solid #000;*/
-    /* box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);*/
     text-align: center;
     line-height: 200px;
     font-size: 60px;
@@ -151,8 +161,9 @@ main {
 
 .dice-container > div figure {
   background-repeat: no-repeat;
-  background-position: top left;
-  background-size: 100px 100px; }
+  background-position: center;
+  background-size: 106px 106px;
+  border: 1px solid #000; }
 
 .dice-container > div .front {
   -webkit-transform: rotateY(0deg) translateZ(50px);
