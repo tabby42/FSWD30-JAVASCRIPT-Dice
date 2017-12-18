@@ -80,6 +80,11 @@ main {
 	}
 }
 
+p {
+	margin-top: 3px;
+	margin-bottom: 5px;
+}
+
 .btn-big {
 	font-family: $font-fam;
 	font-weight: $heavy;
@@ -119,11 +124,14 @@ main {
 #turn-msg {
     min-height: 25px;
     text-align: center;
+    padding-top: 5px;
 }
 
 .anim {
 	padding: 40px 20px;
 	padding-top: 5px;
+	position: relative;
+    z-index: 10;
 }
 
 #snail-1 {
@@ -149,6 +157,20 @@ main {
     height: 60px;
     background-image: url('../images/leaves.png');
     background-size: contain;
+    &:before, &:after {
+    	position: absolute;
+    	content: '';
+    	width: 1100%;
+    	height: 2px;
+    	background-color: #000;
+    	margin-top: 42px;
+    }
+    &:before {
+    	left: -1110%;
+    }
+    &:after {
+    	right: -1110%;
+    }
 }
 
 .display-p1,

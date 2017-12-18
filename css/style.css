@@ -58,6 +58,10 @@ main {
   main > div:not(.anim) {
     text-align: center; }
 
+p {
+  margin-top: 3px;
+  margin-bottom: 5px; }
+
 .btn-big {
   font-family: "Fira Sans", sans-serif;
   font-weight: 900;
@@ -91,11 +95,14 @@ main {
 
 #turn-msg {
   min-height: 25px;
-  text-align: center; }
+  text-align: center;
+  padding-top: 5px; }
 
 .anim {
   padding: 40px 20px;
-  padding-top: 5px; }
+  padding-top: 5px;
+  position: relative;
+  z-index: 10; }
 
 #snail-1 {
   background-image: url("../images/snail-left.png");
@@ -118,6 +125,17 @@ main {
   height: 60px;
   background-image: url("../images/leaves.png");
   background-size: contain; }
+  #salad:before, #salad:after {
+    position: absolute;
+    content: '';
+    width: 1100%;
+    height: 2px;
+    background-color: #000;
+    margin-top: 42px; }
+  #salad:before {
+    left: -1110%; }
+  #salad:after {
+    right: -1110%; }
 
 .display-p1,
 .display-p2 {
