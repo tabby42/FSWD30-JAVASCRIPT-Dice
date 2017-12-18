@@ -1,12 +1,5 @@
-//next -->
-//snail should only move when visible rolling is over --> DONE
-//after each roll --> display message, how far the snail will move --> DONE
-//display score --> DONE
-//tell, which player's turn it is, enable/disable button respectively --> DONE
-//declare winner, when one player's score has reached max --> DONE
-//random color for each player on load --> DONE
+//TODO
 //help section 
-//identical numbers check not working yet --> DONE
 
 class Player { 
 	constructor (name, dice, msgBox, scoreBox) { 
@@ -17,7 +10,7 @@ class Player {
 		this.msg = "";
 		this.score = 0;
 		this.scoreBox = scoreBox;
-		this.max = 250;
+		this.max = 85;
 		this.steps = 0;
 	} 
 
@@ -45,15 +38,15 @@ class Player {
 		//var testarr = [5,5,5];
 		for (var i = 0; i < this.rolls.length; i++) {
 			if (parseInt(this.rolls[i]) === 1) {
-				this.steps += 15;
+				this.steps += 5;
 				this.msg += "You rolled a One!<br>";
 			} else if (parseInt(this.rolls[i]) === 5) {
-				this.steps += 10;
+				this.steps += 3;
 				this.msg += "You rolled a Five!<br>";
 			} 
 		}
 		if (allIdentical(this.dice)) {
-			this.steps += 50;
+			this.steps += 10;
 			this.msg += "You rolled three identical numbers!<br>";
 		}
 		if (this.steps > 0) {
@@ -71,10 +64,10 @@ class Player {
 	    var style = el.style;
 		//console.log(style);
 	    if (side === "left") {
-	    	style.marginLeft = Number(this.score) + "px";
+	    	style.marginLeft = Number(this.score) + "%";
 			console.log("margin: " + style.marginLeft);
 	    } else {
-	    	style.marginRight = Number(this.score) + "px";
+	    	style.marginRight = Number(this.score) + "%";
 			console.log("margin: " + style.marginRight);
 	    }
 	}
@@ -155,41 +148,38 @@ var face = 1,
 	dice6 = document.getElementById("dice-6"),
 	diceOne = [dice1, dice2, dice3],
 	diceTwo = [dice4, dice5, dice6];
-var msgOne = document.getElementById("msg-1");
-var msgTwo = document.getElementById("msg-2");
 //variables for player
-var scoreOne = document.getElementById("score-1");
-var scoreTwo = document.getElementById("score-2");
-// var playerOne = prompt("Player 1, please enter your name:");
-// var playerTwo = prompt("Player 2, please enter your name:");
-var playerOne = new Player("One", diceOne, msgOne, scoreOne);
-var playerTwo = new Player("Two", diceTwo, msgTwo, scoreTwo);
-var colorOne = randomColor();
-var colorTwo = randomColor();
+var msgOne = document.getElementById("msg-1"),
+	msgTwo = document.getElementById("msg-2"),
+	scoreOne = document.getElementById("score-1"),
+	scoreTwo = document.getElementById("score-2"),
+	playerOneName = prompt("Player 1, please enter your name:"),
+	playerTwoName = prompt("Player 2, please enter your name:"),
+	playerOne = new Player(playerOneName, diceOne, msgOne, scoreOne),
+	playerTwo = new Player(playerTwoName, diceTwo, msgTwo, scoreTwo),
+	colorOne = randomColor(),
+	colorTwo = randomColor(),
+	turnMsg = document.getElementById("turn-msg");
+//set names and colors for players
 document.getElementById("player-1").textContent = playerOne.name;
 document.getElementById("player-2").textContent = playerTwo.name;
 document.getElementById("player-1").style.color = colorOne;
 document.getElementById("player-2").style.color = colorTwo;
-
 //variables for UI elements
-var btnOne = document.getElementById("btn-player-1");
-var btnTwo = document.getElementById("btn-player-2");
+var btnOne = document.getElementById("btn-player-1"),
+	btnTwo = document.getElementById("btn-player-2"),
+	snailOne = document.getElementById("snail-1"),
+	snailTwo = document.getElementById("snail-2");
+//set buttons
 btnOne.disabled = false;
 btnTwo.disabled = true; 
-//style buttons with random color
+//colors for buttons and snails
 btnOne.style.backgroundColor = colorOne;
 btnTwo.style.backgroundColor = colorTwo;
 btnOne.style.borderColor = colorOne;
 btnTwo.style.borderColor = colorTwo;
-
-var snailOne = document.getElementById("snail-1");
-var snailTwo = document.getElementById("snail-2");
-//style snail bg with random color
 snailOne.style.backgroundColor = colorOne;
 snailTwo.style.backgroundColor = colorTwo;
-
-var turnMsg = document.getElementById("turn-msg");
-
 //Event Listeners
 btnOne.addEventListener("click", () => playerOne.rollDice(playerOne, snailOne, "left"));
 btnTwo.addEventListener("click", () => playerTwo.rollDice(playerTwo, snailTwo, "right"));
@@ -202,13 +192,13 @@ function checkTurn() {
 		btnTwo.disabled = false;
 		btnOne.disabled = true;
 		setTimeout(function () {
-			turnMsg.innerHTML = "Hey, <strong class='color-2'>" + playerTwo.name + "!</strong> It's your turn!";
+			turnMsg.innerHTML = "Hey, <strong>" + playerTwo.name + "!</strong> It's your turn!";
 		}, 3200);
 	} else if (btnOne.disabled && !btnTwo.disabled) {
 		btnTwo.disabled = true;
 		btnOne.disabled = false;
 		setTimeout(function () {
-			turnMsg.innerHTML = "Hey, <strong class='color-1'>" + playerOne.name + "!</strong> It's your turn!";
+			turnMsg.innerHTML = "Hey, <strong>" + playerOne.name + "!</strong> It's your turn!";
 		}, 3200);
 	} else {
 		btnTwo.disabled = true;
@@ -218,10 +208,6 @@ function checkTurn() {
 
 //helper functions
 
-/** getRandomInt -->
- * Returns a random integer between min (inclusive) and max (inclusive)
- * Using Math.round() will give you a non-uniform distribution
- */
 // function getRandomInt(min, max) {
 //     return Math.floor(Math.random() * (max - min + 1)) + min;
 // }
@@ -241,7 +227,6 @@ function allIdentical( arr ) {
     return true;
 }
 
-//Dynamic Background
 //number.toString(radix) -->
 //Which base to use for representing a numeric value. Must be an integer between 2 and 36
 function randomColor () {
@@ -252,7 +237,6 @@ function randomColor () {
 	// document.getElementById("color").innerHTML = "rgb(" + red + ","  + green + ","  + blue + ")<br>"
 	// + "HEX: #" + red.toString(16) + green.toString(16) + blue.toString(16);
 }
-
 // var bg = randomColor();
 // document.body.style.backgroundColor = bg;
 
