@@ -45,7 +45,7 @@ class Player {
 				this.msg += "You rolled a Five!<br>";
 			} 
 		}
-		if (allIdentical(this.dice)) {
+		if (allIdentical(this.rolls)) {
 			this.steps += 10;
 			this.msg += "You rolled three identical numbers!<br>";
 		}
@@ -95,7 +95,7 @@ class Player {
 	updateScore() {
 		this.scoreBox.innerHTML = this.score;
 		if (this.score >= this.max) {
-			this.msgBox.innerHTML = "You WON!";
+			this.msgBox.innerHTML = "Congratulations, you won!<br>Now your snail can enjoy her salad!";
 			turnMsg.innerHTML = "Reload page to start fresh!";
 			btnOne.disabled = true;
 			btnTwo.disabled = true;
