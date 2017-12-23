@@ -1,6 +1,3 @@
-//TODO
-//help section 
-
 class Player { 
 	constructor (name, dice, msgBox, scoreBox) { 
 		this.name = name;
@@ -27,10 +24,10 @@ class Player {
 
 	displayRolls (selector) {
 		for (var i = 0; i < selector.length; i++) {
-			//console.log("selbefore" + selector[i].className);
+			//console.log("sel-before" + selector[i].className);
 			//console.log("should turn to " + this.rolls[i] );
 			selector[i].className = 'show' + this.rolls[i];
-			//console.log("selafter" + selector[i].className);
+			//console.log("sel-after" + selector[i].className);
 		}
 	}
 
